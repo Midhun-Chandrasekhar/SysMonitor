@@ -42,7 +42,7 @@ Clone to code from repo and perform the below actions
 <br>
 4. Use "python app.py" to make app server up
 <br>
-4. Unit test "python -m tests" to run test suite
+4. Use "python -m tests" to run test suite
 <br><br>
 
 <h3>Front End</h3>
