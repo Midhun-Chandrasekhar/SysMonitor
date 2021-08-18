@@ -1,7 +1,7 @@
 from flask import Blueprint
 
-from Server.components.matrix.utils import MatrixCollector
-from Server.utils import response_handler
+from .utils import MatrixCollector
+from utils import response_handler
 
 matrix_component = Blueprint('simple_page', __name__)
 
