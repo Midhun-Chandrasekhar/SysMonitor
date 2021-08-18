@@ -1,4 +1,4 @@
 venv/
 .idea/
 ui/node_modules/
-*.pyc 
+*.pyc
