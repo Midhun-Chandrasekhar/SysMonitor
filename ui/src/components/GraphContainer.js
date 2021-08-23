@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getUrl, httpHeader } from '../utils/httpUtils';
-import { dataStruct } from '../utils/constants';
+import { dataStruct, graphOptions } from '../utils/constants';
 import { apiInterval } from '../settings';
 import Graph from './Graph';
 import * as _ from 'lodash';
@@ -23,19 +23,33 @@ class GraphContainer extends Component {
     clearDataHandler = (graphName) => {
         const newData = _.cloneDeep(this.state);
         newData[graphName].data = [];
+        newData[graphName].label = [""];
         this.setState(newData);
     };
 
+    reFrameData = (data) => {
+        Object.entries(data).forEach(([k,v]) => {
+            console.log(v.data.length)
+            if (v.data.length > graphOptions.y_max_columns){
+                v.data.shift();
+                v.label.shift();
+            }
+        })
+        return data;
+    };
+
+
     updateData = (res) => {
         const newData = _.cloneDeep(this.state);
-        newData.RAM.data.push(res.data.ram)
-        newData.CPU.data.push(res.data.cpu)
-        newData.GPU.data.push(res.data.gpu)
+        this.reFrameData(newData);
 
-        // To DO:  react-chart wrapper is not accepting the label
-        newData.RAM.label.push("")
-        newData.CPU.label.push("")
-        newData.GPU.label.push("")
+        newData.RAM.data.push(res.data.ram);
+        newData.CPU.data.push(res.data.cpu);
+        newData.GPU.data.push(res.data.gpu);
+
+        newData.RAM.label.push("");
+        newData.CPU.label.push("");
+        newData.GPU.label.push("");
         return newData;
         
     };
@@ -46,7 +60,6 @@ class GraphContainer extends Component {
             return res.json();})
             .then(res => {
             const newData = this.updateData(res);
-            console.log(newData)
             this.setState(newData);
         });
     };

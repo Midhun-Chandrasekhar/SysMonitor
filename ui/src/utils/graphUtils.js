@@ -14,6 +14,6 @@ export const formatGraphData = (data) => {
         ]
       }
   
-    return gData;
-  };
+  return gData;
+};
   
