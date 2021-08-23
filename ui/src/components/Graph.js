@@ -2,6 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import Loader from './shared/Loader';
 import { formatGraphData } from '../utils/graphUtils';
+import { graphOptions } from '../utils/constants';
 
 
 const Graph = (props) => {
@@ -21,7 +22,7 @@ const Graph = (props) => {
       <div className="card text-center">
           <br/>
           <div>
-            <Line data={graph} />
+            <Line data={graph} options={graphOptions.options}/>
           </div>
           <button onClick={clearData} 
             className="btn btn-warning">Clear Data</button>
